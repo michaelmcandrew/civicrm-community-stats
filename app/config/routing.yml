@@ -1,0 +1,4 @@
+civi_community_stats:
+    resource: "@CiviCommunityStatsBundle/Controller"
+    type: annotation
+
