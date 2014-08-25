@@ -1,12 +1,7 @@
-USE civicrm_stats_legacy;
-DELETE FROM civicrm_stats.Extension;
-DELETE FROM civicrm_stats.Entity;
-DELETE FROM civicrm_stats.Ping;
-DELETE FROM civicrm_stats.Site;
-
 -- Add the sites (based on unique hashes)
-INSERT INTO civicrm_stats.Site
-    SELECT DISTINCT NULL, hash FROM stats
+INSERT INTO civicrm_stats.Site (hash)
+    SELECT DISTINCT  hash 
+    FROM civicrm_stats_raw.stats
 ;
 
 -- Add the ping backs
@@ -14,7 +9,7 @@ INSERT INTO civicrm_stats.Ping (site_id, uf, language, country, version, ufversi
     SELECT
         Site.id, uf, lang, co, version, ufv, mysql, php, PPtypes, time, stats.id
     FROM civicrm_stats.Site
-    JOIN stats
+    JOIN civicrm_stats_raw.stats
         ON Site.hash = stats.hash
 ;
 
@@ -22,7 +17,7 @@ INSERT INTO civicrm_stats.Ping (site_id, uf, language, country, version, ufversi
 INSERT INTO civicrm_stats.Extension (ping_id, enabled, name, version) 
     SELECT
         Ping.id, extensions.enabled, extensions.name, extensions.version
-    FROM civicrm_stats_legacy.extensions
+    FROM civicrm_stats_raw.extensions
     JOIN civicrm_stats.Ping ON Ping.legacy_stat_id = extensions.stat_id
 ;
 
@@ -30,6 +25,6 @@ INSERT INTO civicrm_stats.Extension (ping_id, enabled, name, version)
 INSERT INTO civicrm_stats.Entity (ping_id, name, count) 
     SELECT
         Ping.id, entities.name, entities.size
-    FROM civicrm_stats_legacy.entities
+    FROM civicrm_stats_raw.entities
     JOIN civicrm_stats.Ping ON Ping.legacy_stat_id = entities.stat_id
 ;
