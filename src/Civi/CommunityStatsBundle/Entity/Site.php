@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Site
  *
  * @ORM\Table()
+ * @ORM\Entity()
  */
 class Site
 {
@@ -58,12 +59,24 @@ class Site
     private $active = 0;
 
     /**
-     * @var DateTime
+     * @var integer
      * @ORM\Column(type="integer")
      *
      */
     private $pingCount;
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->pings = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
     public function getId()
     {
         return $this->id;
@@ -82,7 +95,6 @@ class Site
         return $this;
     }
 
-
     /**
      * Get hash
      *
@@ -92,12 +104,97 @@ class Site
     {
         return $this->hash;
     }
+
     /**
-     * Constructor
+     * Set daysAlive
+     *
+     * @param integer $daysAlive
+     * @return Site
      */
-    public function __construct()
+    public function setDaysAlive($daysAlive)
     {
-        $this->pings = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->daysAlive = $daysAlive;
+
+        return $this;
+    }
+
+    /**
+     * Get daysAlive
+     *
+     * @return integer 
+     */
+    public function getDaysAlive()
+    {
+        return $this->daysAlive;
+    }
+
+    /**
+     * Set latestPing
+     *
+     * @param \DateTime $latestPing
+     * @return Site
+     */
+    public function setLatestPing($latestPing)
+    {
+        $this->latestPing = $latestPing;
+
+        return $this;
+    }
+
+    /**
+     * Get latestPing
+     *
+     * @return \DateTime 
+     */
+    public function getLatestPing()
+    {
+        return $this->latestPing;
+    }
+
+    /**
+     * Set active
+     *
+     * @param boolean $active
+     * @return Site
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * Get active
+     *
+     * @return boolean 
+     */
+    public function getActive()
+    {
+        return $this->active;
+    }
+
+    /**
+     * Set pingCount
+     *
+     * @param integer $pingCount
+     * @return Site
+     */
+    public function setPingCount($pingCount)
+    {
+        $this->pingCount = $pingCount;
+
+        return $this;
+    }
+
+    /**
+     * Get pingCount
+     *
+     * @return integer 
+     */
+    public function getPingCount()
+    {
+        return $this->pingCount;
     }
 
     /**
@@ -131,97 +228,5 @@ class Site
     public function getPings()
     {
         return $this->pings;
-    }
-
-    /**
-     * Set daysAlive
-     *
-     * @param integer $daysAlive
-     * @return Site
-     */
-    public function setDaysAlive($daysAlive)
-    {
-        $this->daysAlive = $daysAlive;
-
-        return $this;
-    }
-
-    /**
-     * Get daysAlive
-     *
-     * @return integer 
-     */
-    public function getDaysAlive()
-    {
-        return $this->daysAlive;
-    }
-
-    /**
-     * Set mostRecentPing
-     *
-     * @param integer $mostRecentPing
-     * @return Site
-     */
-    public function setLatestPing($latestPing)
-    {
-        $this->lastestPing = $latestPing;
-
-        return $this;
-    }
-
-    /**
-     * Get mostRecentPing
-     *
-     * @return integer 
-     */
-    public function getLatestPing()
-    {
-        return $this->latestPing;
-    }
-
-    /**
-     * Set pingCount
-     *
-     * @param \DateTime $pingCount
-     * @return Site
-     */
-    public function setPingCount($pingCount)
-    {
-        $this->pingCount = $pingCount;
-
-        return $this;
-    }
-
-    /**
-     * Get pingCount
-     *
-     * @return \DateTime 
-     */
-    public function getPingCount()
-    {
-        return $this->pingCount;
-    }
-
-    /**
-     * Set active
-     *
-     * @param boolean $active
-     * @return Site
-     */
-    public function setActive($active)
-    {
-        $this->active = $active;
-
-        return $this;
-    }
-
-    /**
-     * Get active
-     *
-     * @return boolean 
-     */
-    public function getActive()
-    {
-        return $this->active;
     }
 }
