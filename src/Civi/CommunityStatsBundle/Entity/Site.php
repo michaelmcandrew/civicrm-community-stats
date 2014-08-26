@@ -8,7 +8,6 @@ use Doctrine\ORM\Mapping as ORM;
  * Site
  *
  * @ORM\Table()
- * @ORM\Entity
  */
 class Site
 {
@@ -34,12 +33,6 @@ class Site
     protected $pings;
 
     /**
-     * Get id
-     *
-     * @return integer 
-     */
-
-    /**
      * @var integer
      *
      * @ORM\Column(type="integer")
@@ -47,11 +40,22 @@ class Site
     private $daysAlive;
 
     /**
-     * @var integer
+     * @var DateTime
      *
      * @ORM\Column(type="datetime")
      */
-    private $mostRecentPing;
+    private $latestPing;
+
+    /**
+     * @var integer
+     * @ORM\Column(type="integer")
+     *
+     */
+
+    /**
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    private $active = 0;
 
     /**
      * @var DateTime
@@ -77,6 +81,7 @@ class Site
 
         return $this;
     }
+
 
     /**
      * Get hash
@@ -157,9 +162,9 @@ class Site
      * @param integer $mostRecentPing
      * @return Site
      */
-    public function setMostRecentPing($mostRecentPing)
+    public function setLatestPing($latestPing)
     {
-        $this->mostRecentPing = $mostRecentPing;
+        $this->lastestPing = $latestPing;
 
         return $this;
     }
@@ -169,9 +174,9 @@ class Site
      *
      * @return integer 
      */
-    public function getMostRecentPing()
+    public function getLatestPing()
     {
-        return $this->mostRecentPing;
+        return $this->latestPing;
     }
 
     /**
@@ -195,5 +200,28 @@ class Site
     public function getPingCount()
     {
         return $this->pingCount;
+    }
+
+    /**
+     * Set active
+     *
+     * @param boolean $active
+     * @return Site
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * Get active
+     *
+     * @return boolean 
+     */
+    public function getActive()
+    {
+        return $this->active;
     }
 }

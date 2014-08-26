@@ -107,6 +107,10 @@ class Ping
      */
     private $legacy_stat_id;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    private $latest = 0;
 
     /**
      * Get id
@@ -558,5 +562,51 @@ class Ping
     public function getStatIdLegacy()
     {
         return $this->stat_id_legacy;
+    }
+
+    /**
+     * Set legacy_stat_id
+     *
+     * @param string $legacyStatId
+     * @return Ping
+     */
+    public function setLegacyStatId($legacyStatId)
+    {
+        $this->legacy_stat_id = $legacyStatId;
+
+        return $this;
+    }
+
+    /**
+     * Get legacy_stat_id
+     *
+     * @return string 
+     */
+    public function getLegacyStatId()
+    {
+        return $this->legacy_stat_id;
+    }
+
+    /**
+     * Set latest
+     *
+     * @param boolean $latest
+     * @return Ping
+     */
+    public function setLatest($latest)
+    {
+        $this->latest = $latest;
+
+        return $this;
+    }
+
+    /**
+     * Get latest
+     *
+     * @return boolean 
+     */
+    public function getLatest()
+    {
+        return $this->latest;
     }
 }

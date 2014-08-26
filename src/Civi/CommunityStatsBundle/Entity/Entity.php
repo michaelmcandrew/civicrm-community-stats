@@ -96,4 +96,27 @@ class Entity
     {
         return $this->ping;
     }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Entity
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
 }
