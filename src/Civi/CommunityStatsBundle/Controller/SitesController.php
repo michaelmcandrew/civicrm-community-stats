@@ -49,7 +49,8 @@ class SitesController extends Controller
         $qb->select(array('p.'.$var, 'count(p.id) AS total'))
             ->from('CiviCommunityStatsBundle:Ping', 'p')
             ->join('p.site', 's', 'WITH', 's.active=1 AND p.latest=1')
-            ->groupBy('p.'.$var);
+            ->groupBy('p.'.$var)
+            ->orderBy('total', 'DESC');
         $summary = $qb->getQuery()->getResult();
         foreach($summary as $line){
             $result[$line[$var]]=$line['total'];
