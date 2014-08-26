@@ -4,4 +4,4 @@ civi_community_stats:
 
 home:
     path: /
-    defaults: { _controller: CiviCommunityStatsBundle:Default:total }
+    defaults: { _controller: CiviCommunityStatsBundle:Sites:index }
