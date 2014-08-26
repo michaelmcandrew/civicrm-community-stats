@@ -11,6 +11,29 @@ Statistics can be founf on URLS such as:
 http://stats.civicrm.org/active-sites.html
 http://stats.civicrm.org/active-sites.json
 
+
+## Requirements
+* copy of raw civicrm community statistics in a database names civicrm_stats_raw and another db called civicrm_stats
+* composer
+
+## Installation
+
+/Although we only think we'll want one copy of the application runnning to provide ping back stats, installation instructions are provided here for those that want to further develop the application/
+
+/These instructions presume that you are comfortable working with Symfony apps/
+
+1. Clone the repository (git clone git@github.com:michaelmcandrew/civicrm-community-stats.git)
+
+2. Do a standard composer install(cd civicrm-community-stats, composer install, etc.). You should name the database civicrm_stats when prompted (including warming up the production cache with 'app/console cache:clear --env=prod', etc.)
+
+3. Configure your webserver to serve the application from http://stats (or similar)
+
+4. Ensure that a recent copy of CiviCRM's raw statistics are present in a database names civicrm_stats_raw
+
+5. From the application root, run src/bin/rebuild.sh
+
+6. Visit http://stats/sites/active. You should see a json response of the current estimated active sites
+
 ## Ping backs
 
 All ping backs are anonymous.
