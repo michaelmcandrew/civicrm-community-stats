@@ -2,3 +2,6 @@ civi_community_stats:
     resource: "@CiviCommunityStatsBundle/Controller"
     type: annotation
 
+home:
+    path: /
+    defaults: { _controller: CiviCommunityStatsBundle:Default:total }
