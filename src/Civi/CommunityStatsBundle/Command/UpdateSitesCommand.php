@@ -55,8 +55,6 @@ class UpdateSitesCommand extends ContainerAwareCommand {
             $site[0]->setDaysAlive($daysAlive->format('%a'));
             echo "\r$counter sites processed.";
             $counter++;
-            /...
-            //cache active
             if(
                 $site[0]->getPingCount() >= $activeSiteCriteria['pingCount'] &&
                 $site[0]->getLatestPing() >= $activeSiteCriteria['latestPing'] &&
